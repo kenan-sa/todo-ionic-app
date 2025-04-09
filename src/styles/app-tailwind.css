@@ -1,0 +1,3 @@
+/* @tailwind base; prevents tailwind from removing default styles relted to ionic */
+@import "tailwindcss";
+@tailwind utilities;

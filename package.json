@@ -1,15 +1,16 @@
 {
-  "name": "to-do-frontEnd",
+  "name": "to-do-front-end",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "npm run dev",
+    "dev": "vite --port 8100",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint"
+    "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@capacitor/app": "7.0.1",
@@ -17,18 +18,25 @@
     "@capacitor/haptics": "7.0.1",
     "@capacitor/keyboard": "7.0.1",
     "@capacitor/status-bar": "7.0.1",
+    "@hookform/resolvers": "^5.0.1",
     "@ionic/react": "^8.5.0",
     "@ionic/react-router": "^8.5.0",
+    "@tailwindcss/vite": "^4.1.3",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "ionicons": "^7.4.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
+    "react-hook-form": "^7.55.0",
     "react-router": "^5.3.4",
-    "react-router-dom": "^5.3.4"
+    "react-router-dom": "^5.3.4",
+    "tailwind": "^4.0.0",
+    "tailwindcss-safe-area-capacitor": "^0.5.1",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@capacitor/cli": "7.2.0",
+    "@tailwindcss/postcss": "^4.1.3",
     "@testing-library/dom": ">=7.21.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^16.2.0",
@@ -37,6 +45,7 @@
     "@types/react-dom": "19.0.4",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-react": "^4.0.1",
+    "autoprefixer": "^10.4.21",
     "cypress": "^13.5.0",
     "eslint": "^9.20.1",
     "eslint-plugin-react": "^7.32.2",
@@ -44,6 +53,8 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "jsdom": "^22.1.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.3",
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "typescript-eslint": "^8.24.0",

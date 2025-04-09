@@ -14,8 +14,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+        "paths": {
+            "@/*": [
+                "./*"
+            ],
+            "@/assets": [
+                "./assets/*"
+            ],
+            "app/*": [
+                "./app/*"
+            ]
+        }
+    },
+    "include": [
+        "./src", //
+        "./.eslintrc.cjs",
+        // "./capacitor.config.ts",
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+      ]
 }
