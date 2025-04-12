@@ -6,11 +6,16 @@ import { IonButton, IonInput } from '@ionic/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+import { Todo } from '@/api/todoService';
+import { useTodoLoading } from '@/store/todoZusStore';
+
 type Props = {
     onAdd: (data: TodoFormValues) => void;
 };
 
 export const ToDoForm = ({ onAdd }: Props) => {
+    const isLoading = useTodoLoading();
+
     const todoValidationSchema = useMemo(
         () =>
             Yup.object({
@@ -93,8 +98,4 @@ export const ToDoForm = ({ onAdd }: Props) => {
     );
 };
 
-export type TodoFormValues = {
-    id?: number;
-    title: string;
-    description: string;
-};
+export type TodoFormValues = Todo;

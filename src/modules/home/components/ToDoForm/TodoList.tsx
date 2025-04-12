@@ -2,16 +2,15 @@ import React from 'react';
 
 import { TodoFormValues } from './ToDoForm';
 import { TodoCard } from './TodoCard';
+import { useTodos } from '@/store/todoZusStore';
 
-export const TodoList = ({ todos }: { todos: TodoFormValues[] }) => {
+export const TodoList = () => {
+    const todos = useTodos();
+
     return (
         <div className="m-4 flex flex-col gap-4">
             {todos.map((todo, idx) => (
-                <TodoCard
-                    title={todo.title}
-                    description={todo.description}
-                    key={idx}
-                />
+                <TodoCard todo={todo} key={idx} />
             ))}
         </div>
     );

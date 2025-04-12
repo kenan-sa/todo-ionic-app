@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import {
     IonPage,
@@ -9,23 +9,50 @@ import {
     IonButtons,
     IonMenuButton,
     IonInput,
+    IonSpinner,
 } from '@ionic/react';
+
+import {
+    useTodoActions,
+    useTodoLoading,
+    useTodos,
+    useTodoStore,
+} from '@/store/todoZusStore';
+
 import { ToDoForm, TodoFormValues } from '../../components/ToDoForm';
 import { TodoList } from '../../components/ToDoForm/TodoList';
 
 export const HomePage = () => {
-    const [todos, setTodos] = useState<Array<TodoFormValues>>([]);
+    const todos = useTodos();
 
-    const handleAddTodo = useCallback((data: TodoFormValues) => {
-        if (!data) return;
+    const isLoading = useTodoLoading();
 
-        const newTodo = {
-            ...data,
-            id: Date.now(),
-        };
+    const { addOne, removeOne, fetchAll } = useTodoActions();
 
-        setTodos((prev) => [...prev, newTodo]);
-    }, []);
+    const handleAddTodo = useCallback(
+        async (data: TodoFormValues) => {
+            try {
+                if (!data) return;
+
+                // Create new todo without 'id'
+                const newTodo = {
+                    title: data.title,
+                    description: data.description,
+                };
+
+                await addOne(newTodo); // Call the store's action
+            } catch (error) {
+                console.error('Error adding todo:', error);
+            }
+        },
+        [addOne]
+    );
+
+    useEffect(() => {
+        if (todos.length === 0) {
+            fetchAll();
+        }
+    }, [todos]);
 
     return (
         <IonPage>
@@ -47,9 +74,19 @@ export const HomePage = () => {
             >
                 <ToDoForm onAdd={handleAddTodo} />
 
-                <div className="overflow-y-auto">
-                    <TodoList todos={todos} />
-                </div>
+                {isLoading && (
+                    <IonSpinner
+                        name="crescent"
+                        className="size-14"
+                        color="primary"
+                    ></IonSpinner>
+                )}
+
+                {!isLoading && (
+                    <div className="overflow-y-auto">
+                        <TodoList />
+                    </div>
+                )}
             </IonContent>
         </IonPage>
     );
